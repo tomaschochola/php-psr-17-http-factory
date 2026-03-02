@@ -1,0 +1,40 @@
+{
+  "author": {
+    "email": "tomaschochola@tomaschochola.cz",
+    "name": "Tomáš Chochola",
+    "url": "https://github.com/tomaschochola"
+  },
+  "bugs": {
+    "email": "tomaschochola@tomaschochola.cz",
+    "url": "https://github.com/tomaschochola/php-psr-17-http-factory/issues"
+  },
+  "contributors": [
+    {
+      "email": "tomaschochola@tomaschochola.cz",
+      "name": "Tomáš Chochola",
+      "url": "https://github.com/tomaschochola"
+    }
+  ],
+  "description": "@tomaschochola/php-psr-17-http-factory",
+  "devDependencies": {
+    "@tomaschochola/ts-tooling-eslint-config": "github:tomaschochola/ts-tooling-eslint-config#1.x",
+    "@tomaschochola/ts-tooling-prettier-config": "github:tomaschochola/ts-tooling-prettier-config#1.x"
+  },
+  "funding": {
+    "type": "github",
+    "url": "https://github.com/sponsors/tomaschochola"
+  },
+  "homepage": "https://github.com/tomaschochola/php-psr-17-http-factory",
+  "keywords": [
+    "tomaschochola",
+    "TomasChochola",
+    "Tomas Chochola",
+    "Tomáš Chochola",
+    "php-psr-17-http-factory"
+  ],
+  "license": "CC-BY-ND-4.0",
+  "name": "@tomaschochola/php-psr-17-http-factory",
+  "repository": "github:tomaschochola/php-psr-17-http-factory",
+  "sideEffects": false,
+  "type": "module"
+}
