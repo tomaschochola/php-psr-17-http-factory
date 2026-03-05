@@ -16,6 +16,7 @@ declare(strict_types=1);
 namespace TomasChochola\Psr\Http\Factory;
 
 use Override;
+use Psr\Container\ContainerInterface;
 use Psr\Http\Message\UriFactoryInterface;
 use Psr\Http\Message\UriInterface;
 use TomasChochola\Psr\Http\Message\Uri;
@@ -26,6 +27,11 @@ use Uri\Rfc3986\Uri as RfcUri;
  */
 readonly class UriFactory implements UriFactoryInterface
 {
+    public static function provide(ContainerInterface $container): UriFactoryInterface
+    {
+        return new self();
+    }
+
     #[Override]
     public function createUri(string $uri = ''): UriInterface
     {

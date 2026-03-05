@@ -16,6 +16,7 @@ declare(strict_types=1);
 namespace TomasChochola\Psr\Http\Factory;
 
 use Override;
+use Psr\Container\ContainerInterface;
 use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\StreamFactoryInterface;
@@ -23,6 +24,8 @@ use Psr\Http\Message\UriFactoryInterface;
 use Psr\Http\Message\UriInterface;
 use TomasChochola\Psr\Http\Message\Headers;
 use TomasChochola\Psr\Http\Message\Request;
+
+use function assert;
 
 /**
  * @no-named-arguments
@@ -37,6 +40,17 @@ readonly class RequestFactory implements RequestFactoryInterface
     {
         $this->streamFactory = $streamFactory;
         $this->uriFactory = $uriFactory;
+    }
+
+    public static function provide(ContainerInterface $container): RequestFactoryInterface
+    {
+        $streamFactory = $container->get(StreamFactoryInterface::class);
+        $uriFactory = $container->get(UriFactoryInterface::class);
+
+        assert($streamFactory instanceof StreamFactoryInterface);
+        assert($uriFactory instanceof UriFactoryInterface);
+
+        return new self($streamFactory, $uriFactory);
     }
 
     #[Override]

@@ -16,11 +16,14 @@ declare(strict_types=1);
 namespace TomasChochola\Psr\Http\Factory;
 
 use Override;
+use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamFactoryInterface;
 use TomasChochola\Psr\Http\Message\Headers;
 use TomasChochola\Psr\Http\Message\Response;
+
+use function assert;
 
 /**
  * @no-named-arguments
@@ -32,6 +35,15 @@ readonly class ResponseFactory implements ResponseFactoryInterface
     public function __construct(StreamFactoryInterface $streamFactory)
     {
         $this->streamFactory = $streamFactory;
+    }
+
+    public static function provide(ContainerInterface $container): ResponseFactoryInterface
+    {
+        $streamFactory = $container->get(StreamFactoryInterface::class);
+
+        assert($streamFactory instanceof StreamFactoryInterface);
+
+        return new self($streamFactory);
     }
 
     #[Override]
