@@ -17,20 +17,20 @@ namespace TomasChochola\Psr\Http\Factory;
 
 use Override;
 use Psr\Container\ContainerInterface;
-use Psr\Http\Message\RequestFactoryInterface;
-use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ServerRequestFactoryInterface;
+use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\StreamFactoryInterface;
 use Psr\Http\Message\UriFactoryInterface;
-use Psr\Http\Message\UriInterface;
-use TomasChochola\Psr\Http\Message\Headers;
-use TomasChochola\Psr\Http\Message\Request;
+use TomasChochola\Psr\Http\Message\HttpHeaders;
+use TomasChochola\Psr\Http\Message\HttpServerRequest;
 
 use function assert;
+use function is_string;
 
 /**
  * @no-named-arguments
  */
-readonly class RequestFactory implements RequestFactoryInterface
+readonly class ServerRequestForge implements ServerRequestFactoryInterface
 {
     protected readonly StreamFactoryInterface $streamFactory;
 
@@ -42,7 +42,7 @@ readonly class RequestFactory implements RequestFactoryInterface
         $this->uriFactory = $uriFactory;
     }
 
-    public static function provide(ContainerInterface $container): RequestFactoryInterface
+    public static function unload(ContainerInterface $container): self
     {
         $streamFactory = $container->get(StreamFactoryInterface::class);
         $uriFactory = $container->get(UriFactoryInterface::class);
@@ -53,9 +53,20 @@ readonly class RequestFactory implements RequestFactoryInterface
         return new self($streamFactory, $uriFactory);
     }
 
-    #[Override]
-    public function createRequest(string $method, mixed $uri): RequestInterface
+    public static function produce(ContainerInterface $container): ServerRequestInterface
     {
-        return new Request($this->streamFactory->createStream(), new Headers([]), '', $method, $uri instanceof UriInterface ? $uri : $this->uriFactory->createUri($uri), '');
+        assert(isset($_SERVER['REQUEST_METHOD']) && is_string($_SERVER['REQUEST_METHOD']));
+        assert(isset($_SERVER['REQUEST_URI']) && is_string($_SERVER['REQUEST_URI']));
+
+        return static::unload($container)->createServerRequest($_SERVER['REQUEST_METHOD'], $_SERVER['REQUEST_URI'], $_SERVER);
+    }
+
+    /**
+     * @param array<int|string, mixed> $serverParams
+     */
+    #[Override]
+    public function createServerRequest(string $method, mixed $uri, array $serverParams = []): ServerRequestInterface
+    {
+        return new HttpServerRequest($this->streamFactory->createStream(), new HttpHeaders([]), '', $method, is_string($uri) ? $this->uriFactory->createUri($uri) : $uri, '', $serverParams, [], [], [], null, []);
     }
 }

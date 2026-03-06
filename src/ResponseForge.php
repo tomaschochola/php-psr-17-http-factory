@@ -20,15 +20,15 @@ use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamFactoryInterface;
-use TomasChochola\Psr\Http\Message\Headers;
-use TomasChochola\Psr\Http\Message\Response;
+use TomasChochola\Psr\Http\Message\HttpHeaders;
+use TomasChochola\Psr\Http\Message\HttpResponse;
 
 use function assert;
 
 /**
  * @no-named-arguments
  */
-readonly class ResponseFactory implements ResponseFactoryInterface
+readonly class ResponseForge implements ResponseFactoryInterface
 {
     protected readonly StreamFactoryInterface $streamFactory;
 
@@ -37,7 +37,7 @@ readonly class ResponseFactory implements ResponseFactoryInterface
         $this->streamFactory = $streamFactory;
     }
 
-    public static function provide(ContainerInterface $container): ResponseFactoryInterface
+    public static function unload(ContainerInterface $container): self
     {
         $streamFactory = $container->get(StreamFactoryInterface::class);
 
@@ -49,6 +49,6 @@ readonly class ResponseFactory implements ResponseFactoryInterface
     #[Override]
     public function createResponse(int $code = 200, string $reasonPhrase = ''): ResponseInterface
     {
-        return new Response($this->streamFactory->createStream(), new Headers([]), '', $code, $reasonPhrase);
+        return new HttpResponse($this->streamFactory->createStream(), new HttpHeaders([]), '', $code, $reasonPhrase);
     }
 }

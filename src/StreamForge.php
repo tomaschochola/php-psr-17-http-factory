@@ -19,7 +19,7 @@ use Override;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\StreamFactoryInterface;
 use Psr\Http\Message\StreamInterface;
-use TomasChochola\Psr\Http\Message\Stream;
+use TomasChochola\Psr\Http\Message\HttpStream;
 use UnexpectedValueException;
 
 use function fopen;
@@ -28,9 +28,9 @@ use function is_resource;
 /**
  * @no-named-arguments
  */
-readonly class StreamFactory implements StreamFactoryInterface
+readonly class StreamForge implements StreamFactoryInterface
 {
-    public static function provide(ContainerInterface $container): StreamFactoryInterface
+    public static function unload(ContainerInterface $container): self
     {
         return new self();
     }
@@ -62,6 +62,6 @@ readonly class StreamFactory implements StreamFactoryInterface
     #[Override]
     public function createStreamFromResource(mixed $resource): StreamInterface
     {
-        return new Stream($resource);
+        return new HttpStream($resource);
     }
 }

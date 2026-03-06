@@ -19,15 +19,15 @@ use Override;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\UriFactoryInterface;
 use Psr\Http\Message\UriInterface;
-use TomasChochola\Psr\Http\Message\Uri;
-use Uri\Rfc3986\Uri as RfcUri;
+use TomasChochola\Psr\Http\Message\HttpUri;
+use Uri\Rfc3986\Uri;
 
 /**
  * @no-named-arguments
  */
-readonly class UriFactory implements UriFactoryInterface
+readonly class UriForge implements UriFactoryInterface
 {
-    public static function provide(ContainerInterface $container): UriFactoryInterface
+    public static function unload(ContainerInterface $container): self
     {
         return new self();
     }
@@ -35,6 +35,6 @@ readonly class UriFactory implements UriFactoryInterface
     #[Override]
     public function createUri(string $uri = ''): UriInterface
     {
-        return new Uri(new RfcUri($uri));
+        return new HttpUri(new Uri($uri));
     }
 }
