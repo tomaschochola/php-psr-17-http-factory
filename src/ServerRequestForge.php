@@ -42,6 +42,14 @@ readonly class ServerRequestForge implements ServerRequestFactoryInterface
         $this->uriFactory = $uriFactory;
     }
 
+    public static function produce(ContainerInterface $container): ServerRequestInterface
+    {
+        assert(isset($_SERVER['REQUEST_METHOD']) && is_string($_SERVER['REQUEST_METHOD']));
+        assert(isset($_SERVER['REQUEST_URI']) && is_string($_SERVER['REQUEST_URI']));
+
+        return static::unload($container)->createServerRequest($_SERVER['REQUEST_METHOD'], $_SERVER['REQUEST_URI'], $_SERVER);
+    }
+
     public static function unload(ContainerInterface $container): self
     {
         $streamFactory = $container->get(StreamFactoryInterface::class);
@@ -53,16 +61,8 @@ readonly class ServerRequestForge implements ServerRequestFactoryInterface
         return new self($streamFactory, $uriFactory);
     }
 
-    public static function produce(ContainerInterface $container): ServerRequestInterface
-    {
-        assert(isset($_SERVER['REQUEST_METHOD']) && is_string($_SERVER['REQUEST_METHOD']));
-        assert(isset($_SERVER['REQUEST_URI']) && is_string($_SERVER['REQUEST_URI']));
-
-        return static::unload($container)->createServerRequest($_SERVER['REQUEST_METHOD'], $_SERVER['REQUEST_URI'], $_SERVER);
-    }
-
     /**
-     * @param array<int|string, mixed> $serverParams
+     * @param array<mixed, mixed> $serverParams
      */
     #[Override]
     public function createServerRequest(string $method, mixed $uri, array $serverParams = []): ServerRequestInterface
