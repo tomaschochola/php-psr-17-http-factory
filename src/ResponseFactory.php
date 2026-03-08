@@ -28,7 +28,7 @@ use function assert;
 /**
  * @no-named-arguments
  */
-readonly class ResponseForge implements ResponseFactoryInterface
+readonly class ResponseFactory implements ResponseFactoryInterface
 {
     protected readonly StreamFactoryInterface $streamFactory;
 

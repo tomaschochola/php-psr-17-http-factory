@@ -28,7 +28,7 @@ use function is_resource;
 /**
  * @no-named-arguments
  */
-readonly class StreamForge implements StreamFactoryInterface
+readonly class StreamFactory implements StreamFactoryInterface
 {
     public static function unload(ContainerInterface $container): self
     {

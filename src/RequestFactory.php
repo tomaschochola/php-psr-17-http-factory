@@ -30,7 +30,7 @@ use function assert;
 /**
  * @no-named-arguments
  */
-readonly class RequestForge implements RequestFactoryInterface
+readonly class RequestFactory implements RequestFactoryInterface
 {
     protected readonly StreamFactoryInterface $streamFactory;
 

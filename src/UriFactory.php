@@ -25,7 +25,7 @@ use Uri\Rfc3986\Uri;
 /**
  * @no-named-arguments
  */
-readonly class UriForge implements UriFactoryInterface
+readonly class UriFactory implements UriFactoryInterface
 {
     public static function unload(ContainerInterface $container): self
     {

@@ -30,7 +30,7 @@ use function is_string;
 /**
  * @no-named-arguments
  */
-readonly class ServerRequestForge implements ServerRequestFactoryInterface
+readonly class ServerRequestFactory implements ServerRequestFactoryInterface
 {
     protected readonly StreamFactoryInterface $streamFactory;
 
