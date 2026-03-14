@@ -15,8 +15,8 @@ declare(strict_types=1);
 
 namespace TomasChochola\Psr\Http\Factory;
 
+use NoDiscard;
 use Override;
-use Psr\Container\ContainerInterface;
 use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\StreamFactoryInterface;
@@ -32,9 +32,9 @@ use function assert;
  */
 readonly class RequestFactory implements RequestFactoryInterface
 {
-    protected readonly StreamFactoryInterface $streamFactory;
+    private readonly StreamFactoryInterface $streamFactory;
 
-    protected readonly UriFactoryInterface $uriFactory;
+    private readonly UriFactoryInterface $uriFactory;
 
     public function __construct(StreamFactoryInterface $streamFactory, UriFactoryInterface $uriFactory)
     {
@@ -42,17 +42,7 @@ readonly class RequestFactory implements RequestFactoryInterface
         $this->uriFactory = $uriFactory;
     }
 
-    public static function unload(ContainerInterface $container): self
-    {
-        $streamFactory = $container->get(StreamFactoryInterface::class);
-        $uriFactory = $container->get(UriFactoryInterface::class);
-
-        assert($streamFactory instanceof StreamFactoryInterface);
-        assert($uriFactory instanceof UriFactoryInterface);
-
-        return new self($streamFactory, $uriFactory);
-    }
-
+    #[NoDiscard]
     #[Override]
     public function createRequest(string $method, mixed $uri): RequestInterface
     {

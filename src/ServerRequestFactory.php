@@ -15,6 +15,7 @@ declare(strict_types=1);
 
 namespace TomasChochola\Psr\Http\Factory;
 
+use NoDiscard;
 use Override;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ServerRequestFactoryInterface;
@@ -32,9 +33,9 @@ use function is_string;
  */
 readonly class ServerRequestFactory implements ServerRequestFactoryInterface
 {
-    protected readonly StreamFactoryInterface $streamFactory;
+    private readonly StreamFactoryInterface $streamFactory;
 
-    protected readonly UriFactoryInterface $uriFactory;
+    private readonly UriFactoryInterface $uriFactory;
 
     public function __construct(StreamFactoryInterface $streamFactory, UriFactoryInterface $uriFactory)
     {
@@ -42,28 +43,19 @@ readonly class ServerRequestFactory implements ServerRequestFactoryInterface
         $this->uriFactory = $uriFactory;
     }
 
+    #[NoDiscard]
     public static function produce(ContainerInterface $container): ServerRequestInterface
     {
         assert(isset($_SERVER['REQUEST_METHOD']) && is_string($_SERVER['REQUEST_METHOD']));
         assert(isset($_SERVER['REQUEST_URI']) && is_string($_SERVER['REQUEST_URI']));
 
-        return static::unload($container)->createServerRequest($_SERVER['REQUEST_METHOD'], $_SERVER['REQUEST_URI'], $_SERVER);
-    }
-
-    public static function unload(ContainerInterface $container): self
-    {
-        $streamFactory = $container->get(StreamFactoryInterface::class);
-        $uriFactory = $container->get(UriFactoryInterface::class);
-
-        assert($streamFactory instanceof StreamFactoryInterface);
-        assert($uriFactory instanceof UriFactoryInterface);
-
-        return new self($streamFactory, $uriFactory);
+        return ServerRequestFactoryAssembler::assemble($container)->createServerRequest($_SERVER['REQUEST_METHOD'], $_SERVER['REQUEST_URI'], $_SERVER);
     }
 
     /**
      * @param array<mixed, mixed> $serverParams
      */
+    #[NoDiscard]
     #[Override]
     public function createServerRequest(string $method, mixed $uri, array $serverParams = []): ServerRequestInterface
     {
