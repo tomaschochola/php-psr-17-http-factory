@@ -17,17 +17,30 @@ namespace TomasChochola\Psr\Http\Factory;
 
 use NoDiscard;
 use Override;
+use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamFactoryInterface;
 use TomasChochola\Psr\Http\Message\HttpHeaders;
 use TomasChochola\Psr\Http\Message\HttpResponse;
 
+use function assert;
+
 /**
  * @no-named-arguments
  */
 readonly class ResponseFactory implements ResponseFactoryInterface
 {
+    #[NoDiscard]
+    public static function inject(ContainerInterface $container): self
+    {
+        $streamFactory = $container->get(StreamFactoryInterface::class);
+
+        assert($streamFactory instanceof StreamFactoryInterface);
+
+        return new self($streamFactory);
+    }
+
     private readonly StreamFactoryInterface $streamFactory;
 
     public function __construct(StreamFactoryInterface $streamFactory)
