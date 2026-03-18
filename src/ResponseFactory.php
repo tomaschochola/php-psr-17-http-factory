@@ -31,6 +31,13 @@ use function assert;
  */
 readonly class ResponseFactory implements ResponseFactoryInterface
 {
+    private readonly StreamFactoryInterface $streamFactory;
+
+    public function __construct(StreamFactoryInterface $streamFactory)
+    {
+        $this->streamFactory = $streamFactory;
+    }
+
     #[NoDiscard]
     public static function inject(ContainerInterface $container): self
     {
@@ -39,13 +46,6 @@ readonly class ResponseFactory implements ResponseFactoryInterface
         assert($streamFactory instanceof StreamFactoryInterface);
 
         return new self($streamFactory);
-    }
-
-    private readonly StreamFactoryInterface $streamFactory;
-
-    public function __construct(StreamFactoryInterface $streamFactory)
-    {
-        $this->streamFactory = $streamFactory;
     }
 
     #[NoDiscard]

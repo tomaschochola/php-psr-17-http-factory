@@ -33,6 +33,16 @@ use function assert;
  */
 readonly class RequestFactory implements RequestFactoryInterface
 {
+    private readonly StreamFactoryInterface $streamFactory;
+
+    private readonly UriFactoryInterface $uriFactory;
+
+    public function __construct(StreamFactoryInterface $streamFactory, UriFactoryInterface $uriFactory)
+    {
+        $this->streamFactory = $streamFactory;
+        $this->uriFactory = $uriFactory;
+    }
+
     #[NoDiscard]
     public static function inject(ContainerInterface $container): self
     {
@@ -43,16 +53,6 @@ readonly class RequestFactory implements RequestFactoryInterface
         assert($uriFactory instanceof UriFactoryInterface);
 
         return new self($streamFactory, $uriFactory);
-    }
-
-    private readonly StreamFactoryInterface $streamFactory;
-
-    private readonly UriFactoryInterface $uriFactory;
-
-    public function __construct(StreamFactoryInterface $streamFactory, UriFactoryInterface $uriFactory)
-    {
-        $this->streamFactory = $streamFactory;
-        $this->uriFactory = $uriFactory;
     }
 
     #[NoDiscard]

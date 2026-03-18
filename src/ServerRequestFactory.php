@@ -26,12 +26,23 @@ use TomasChochola\Psr\Http\Message\HttpHeaders;
 use TomasChochola\Psr\Http\Message\HttpServerRequest;
 
 use function assert;
+use function is_string;
 
 /**
  * @no-named-arguments
  */
 readonly class ServerRequestFactory implements ServerRequestFactoryInterface
 {
+    private readonly StreamFactoryInterface $streamFactory;
+
+    private readonly UriFactoryInterface $uriFactory;
+
+    public function __construct(StreamFactoryInterface $streamFactory, UriFactoryInterface $uriFactory)
+    {
+        $this->streamFactory = $streamFactory;
+        $this->uriFactory = $uriFactory;
+    }
+
     #[NoDiscard]
     public static function inject(ContainerInterface $container): self
     {
@@ -42,16 +53,6 @@ readonly class ServerRequestFactory implements ServerRequestFactoryInterface
         assert($uriFactory instanceof UriFactoryInterface);
 
         return new self($streamFactory, $uriFactory);
-    }
-
-    private readonly StreamFactoryInterface $streamFactory;
-
-    private readonly UriFactoryInterface $uriFactory;
-
-    public function __construct(StreamFactoryInterface $streamFactory, UriFactoryInterface $uriFactory)
-    {
-        $this->streamFactory = $streamFactory;
-        $this->uriFactory = $uriFactory;
     }
 
     /**

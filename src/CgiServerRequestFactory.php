@@ -16,7 +16,6 @@ declare(strict_types=1);
 namespace TomasChochola\Psr\Http\Factory;
 
 use NoDiscard;
-use Override;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ServerRequestFactoryInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -29,6 +28,13 @@ use function is_string;
  */
 readonly class CgiServerRequestFactory
 {
+    private readonly ServerRequestFactoryInterface $factory;
+
+    public function __construct(ServerRequestFactoryInterface $factory)
+    {
+        $this->factory = $factory;
+    }
+
     #[NoDiscard]
     public static function inject(ContainerInterface $container): self
     {
@@ -39,13 +45,6 @@ readonly class CgiServerRequestFactory
         return new self($factory);
     }
 
-    private readonly ServerRequestFactoryInterface $factory;
-
-    public function __construct(ServerRequestFactoryInterface $factory)
-    {
-        $this->factory = $factory;
-    }
-
     #[NoDiscard]
     public function create(): ServerRequestInterface
     {
@@ -53,5 +52,15 @@ readonly class CgiServerRequestFactory
         assert(isset($_SERVER['REQUEST_URI']) && is_string($_SERVER['REQUEST_URI']));
 
         return $this->factory->createServerRequest($_SERVER['REQUEST_METHOD'], $_SERVER['REQUEST_URI'], $_SERVER);
+    }
+
+    #[NoDiscard]
+    public static function produce(ContainerInterface $container): ServerRequestInterface
+    {
+        $factory = $container->get(static::class);
+
+        assert($factory instanceof static);
+
+        return $factory->create();
     }
 }
