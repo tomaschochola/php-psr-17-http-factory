@@ -52,15 +52,22 @@ readonly class CgiServerRequestFactory
 
         assert($factory instanceof static);
 
-        return $factory->create();
+        $server = filter_input_array(\INPUT_SERVER);
+
+        assert(is_array($server));
+
+        return $factory->create($server);
     }
 
+    /**
+     * @param array<mixed, mixed> $server
+     */
     #[NoDiscard]
-    public function create(): ServerRequestInterface
+    public function create(array $server): ServerRequestInterface
     {
-        assert(isset($_SERVER['REQUEST_METHOD']) && is_string($_SERVER['REQUEST_METHOD']));
-        assert(isset($_SERVER['REQUEST_URI']) && is_string($_SERVER['REQUEST_URI']));
+        assert(isset($server['REQUEST_METHOD']) && is_string($server['REQUEST_METHOD']));
+        assert(isset($server['REQUEST_URI']) && is_string($server['REQUEST_URI']));
 
-        return $this->factory->createServerRequest($_SERVER['REQUEST_METHOD'], $_SERVER['REQUEST_URI'], $_SERVER);
+        return $this->factory->createServerRequest($server['REQUEST_METHOD'], $server['REQUEST_URI'], $server);
     }
 }
