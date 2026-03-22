@@ -46,15 +46,6 @@ readonly class CgiServerRequestFactory
     }
 
     #[NoDiscard]
-    public function create(): ServerRequestInterface
-    {
-        assert(isset($_SERVER['REQUEST_METHOD']) && is_string($_SERVER['REQUEST_METHOD']));
-        assert(isset($_SERVER['REQUEST_URI']) && is_string($_SERVER['REQUEST_URI']));
-
-        return $this->factory->createServerRequest($_SERVER['REQUEST_METHOD'], $_SERVER['REQUEST_URI'], $_SERVER);
-    }
-
-    #[NoDiscard]
     public static function produce(ContainerInterface $container): ServerRequestInterface
     {
         $factory = $container->get(static::class);
@@ -62,5 +53,14 @@ readonly class CgiServerRequestFactory
         assert($factory instanceof static);
 
         return $factory->create();
+    }
+
+    #[NoDiscard]
+    public function create(): ServerRequestInterface
+    {
+        assert(isset($_SERVER['REQUEST_METHOD']) && is_string($_SERVER['REQUEST_METHOD']));
+        assert(isset($_SERVER['REQUEST_URI']) && is_string($_SERVER['REQUEST_URI']));
+
+        return $this->factory->createServerRequest($_SERVER['REQUEST_METHOD'], $_SERVER['REQUEST_URI'], $_SERVER);
     }
 }
