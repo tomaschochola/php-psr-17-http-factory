@@ -21,7 +21,11 @@ use Psr\Http\Message\ServerRequestFactoryInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
 use function assert;
+use function filter_input_array;
+use function is_array;
 use function is_string;
+
+use const INPUT_SERVER;
 
 /**
  * @no-named-arguments
@@ -52,7 +56,7 @@ readonly class CgiServerRequestFactory
 
         assert($factory instanceof static);
 
-        $server = filter_input_array(\INPUT_SERVER);
+        $server = filter_input_array(INPUT_SERVER);
 
         assert(is_array($server));
 
