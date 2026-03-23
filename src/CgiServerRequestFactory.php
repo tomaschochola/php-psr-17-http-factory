@@ -19,6 +19,8 @@ use NoDiscard;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ServerRequestFactoryInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use TomasChochola\Psr\Http\Message\HttpUri;
+use Uri\WhatWg\Url;
 
 use function assert;
 use function filter_input_array;
@@ -71,7 +73,9 @@ readonly class CgiServerRequestFactory
     {
         assert(isset($server['REQUEST_METHOD']) && is_string($server['REQUEST_METHOD']));
         assert(isset($server['REQUEST_URI']) && is_string($server['REQUEST_URI']));
+        assert(isset($server['REQUEST_HOST']) && is_string($server['REQUEST_HOST']));
+        assert(isset($server['REQUEST_SCHEME']) && is_string($server['REQUEST_SCHEME']));
 
-        return $this->factory->createServerRequest($server['REQUEST_METHOD'], $server['REQUEST_URI'], $server);
+        return $this->factory->createServerRequest($server['REQUEST_METHOD'], new HttpUri(new Url($server['REQUEST_SCHEME'] . '://' . $server['REQUEST_HOST'] . $server['REQUEST_URI'])), $server);
     }
 }

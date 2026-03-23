@@ -22,6 +22,7 @@ use Psr\Http\Message\UriFactoryInterface;
 use Psr\Http\Message\UriInterface;
 use TomasChochola\Psr\Http\Message\HttpUri;
 use Uri\Rfc3986\Uri;
+use Uri\WhatWg\Url;
 
 /**
  * @no-named-arguments
@@ -38,6 +39,12 @@ readonly class UriFactory implements UriFactoryInterface
     #[Override]
     public function createUri(string $uri = ''): UriInterface
     {
-        return new HttpUri(new Uri($uri));
+        $parsed = Uri::parse($uri);
+
+        if ($parsed !== null) {
+            return new HttpUri($parsed);
+        }
+
+        return new HttpUri(new Url($uri));
     }
 }
