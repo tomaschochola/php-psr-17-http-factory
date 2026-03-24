@@ -17,7 +17,6 @@ namespace TomasChochola\Psr\Http\Factory;
 
 use NoDiscard;
 use Override;
-use Psr\Container\ContainerInterface;
 use Psr\Http\Message\StreamFactoryInterface;
 use Psr\Http\Message\StreamInterface;
 use TomasChochola\Psr\Http\Message\HttpStream;
@@ -31,12 +30,6 @@ use function is_resource;
  */
 readonly class StreamFactory implements StreamFactoryInterface
 {
-    #[NoDiscard]
-    public static function inject(ContainerInterface $container): self
-    {
-        return new self();
-    }
-
     #[NoDiscard]
     #[Override]
     public function createStream(string $content = ''): StreamInterface

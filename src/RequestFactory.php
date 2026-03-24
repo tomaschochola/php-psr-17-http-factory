@@ -17,7 +17,6 @@ namespace TomasChochola\Psr\Http\Factory;
 
 use NoDiscard;
 use Override;
-use Psr\Container\ContainerInterface;
 use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\StreamFactoryInterface;
@@ -41,18 +40,6 @@ readonly class RequestFactory implements RequestFactoryInterface
     {
         $this->streamFactory = $streamFactory;
         $this->uriFactory = $uriFactory;
-    }
-
-    #[NoDiscard]
-    public static function inject(ContainerInterface $container): self
-    {
-        $streamFactory = $container->get(StreamFactoryInterface::class);
-        $uriFactory = $container->get(UriFactoryInterface::class);
-
-        assert($streamFactory instanceof StreamFactoryInterface);
-        assert($uriFactory instanceof UriFactoryInterface);
-
-        return new self($streamFactory, $uriFactory);
     }
 
     #[NoDiscard]

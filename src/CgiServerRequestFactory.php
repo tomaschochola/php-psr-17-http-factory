@@ -16,13 +16,12 @@ declare(strict_types=1);
 namespace TomasChochola\Psr\Http\Factory;
 
 use NoDiscard;
-use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ServerRequestFactoryInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use TomasChochola\Psr\Http\Message\HttpUri;
+use UnexpectedValueException;
 use Uri\WhatWg\Url;
 
-use function assert;
 use function filter_input_array;
 use function is_array;
 use function is_string;
@@ -42,39 +41,29 @@ readonly class CgiServerRequestFactory
     }
 
     #[NoDiscard]
-    public static function inject(ContainerInterface $container): self
+    public function create(): ServerRequestInterface
     {
-        $factory = $container->get(ServerRequestFactoryInterface::class);
-
-        assert($factory instanceof ServerRequestFactoryInterface);
-
-        return new self($factory);
-    }
-
-    #[NoDiscard]
-    public static function produce(ContainerInterface $container): ServerRequestInterface
-    {
-        $factory = $container->get(static::class);
-
-        assert($factory instanceof static);
-
         $server = filter_input_array(INPUT_SERVER);
 
-        assert(is_array($server));
+        if (!is_array($server)) {
+            throw new UnexpectedValueException('filter_input_array');
+        }
 
-        return $factory->create($server);
-    }
+        if (!isset($server['REQUEST_METHOD']) || !is_string($server['REQUEST_METHOD'])) {
+            throw new UnexpectedValueException('$server');
+        }
 
-    /**
-     * @param array<mixed, mixed> $server
-     */
-    #[NoDiscard]
-    public function create(array $server): ServerRequestInterface
-    {
-        assert(isset($server['REQUEST_METHOD']) && is_string($server['REQUEST_METHOD']));
-        assert(isset($server['REQUEST_URI']) && is_string($server['REQUEST_URI']));
-        assert(isset($server['REQUEST_HOST']) && is_string($server['REQUEST_HOST']));
-        assert(isset($server['REQUEST_SCHEME']) && is_string($server['REQUEST_SCHEME']));
+        if (!isset($server['REQUEST_URI']) || !is_string($server['REQUEST_URI'])) {
+            throw new UnexpectedValueException('$server');
+        }
+
+        if (!isset($server['REQUEST_HOST']) || !is_string($server['REQUEST_HOST'])) {
+            throw new UnexpectedValueException('$server');
+        }
+
+        if (!isset($server['REQUEST_SCHEME']) || !is_string($server['REQUEST_SCHEME'])) {
+            throw new UnexpectedValueException('$server');
+        }
 
         return $this->factory->createServerRequest($server['REQUEST_METHOD'], new HttpUri(new Url($server['REQUEST_SCHEME'] . '://' . $server['REQUEST_HOST'] . $server['REQUEST_URI'])), $server);
     }

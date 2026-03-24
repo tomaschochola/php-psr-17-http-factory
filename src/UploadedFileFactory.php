@@ -17,7 +17,6 @@ namespace TomasChochola\Psr\Http\Factory;
 
 use NoDiscard;
 use Override;
-use Psr\Container\ContainerInterface;
 use Psr\Http\Message\StreamInterface;
 use Psr\Http\Message\UploadedFileFactoryInterface;
 use Psr\Http\Message\UploadedFileInterface;
@@ -30,12 +29,6 @@ use const UPLOAD_ERR_OK;
  */
 readonly class UploadedFileFactory implements UploadedFileFactoryInterface
 {
-    #[NoDiscard]
-    public static function inject(ContainerInterface $container): self
-    {
-        return new self();
-    }
-
     #[NoDiscard]
     #[Override]
     public function createUploadedFile(StreamInterface $stream, int|null $size = null, int $error = UPLOAD_ERR_OK, string|null $clientFilename = null, string|null $clientMediaType = null): UploadedFileInterface
