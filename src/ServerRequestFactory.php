@@ -24,7 +24,6 @@ use Psr\Http\Message\UriFactoryInterface;
 use TomasChochola\Psr\Http\Message\HttpHeaders;
 use TomasChochola\Psr\Http\Message\HttpServerRequest;
 
-use function assert;
 use function is_string;
 
 /**

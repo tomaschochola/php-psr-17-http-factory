@@ -23,8 +23,6 @@ use Psr\Http\Message\StreamFactoryInterface;
 use TomasChochola\Psr\Http\Message\HttpHeaders;
 use TomasChochola\Psr\Http\Message\HttpResponse;
 
-use function assert;
-
 /**
  * @no-named-arguments
  */

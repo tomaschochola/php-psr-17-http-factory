@@ -25,8 +25,6 @@ use Psr\Http\Message\UriInterface;
 use TomasChochola\Psr\Http\Message\HttpHeaders;
 use TomasChochola\Psr\Http\Message\HttpRequest;
 
-use function assert;
-
 /**
  * @no-named-arguments
  */
