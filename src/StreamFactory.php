@@ -34,7 +34,7 @@ readonly class StreamFactory implements StreamFactoryInterface
     #[Override]
     public function createStream(string $content = ''): StreamInterface
     {
-        $stream = $this->createStreamFromFile('php://temp/maxmemory:2097152', 'wb+');
+        $stream = $this->createStreamFromFile('php://temp/maxmemory:2097152', 'w+');
 
         if ($content !== '') {
             $stream->write($content);
