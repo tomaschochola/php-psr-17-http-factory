@@ -28,15 +28,15 @@ use TomasChochola\Psr\Http\Message\HttpResponse;
  */
 readonly class ResponseFactory implements ResponseFactoryInterface
 {
-    private readonly StreamFactoryInterface $streamFactory;
+    private StreamFactoryInterface $streamFactory;
 
     public function __construct(StreamFactoryInterface $streamFactory)
     {
         $this->streamFactory = $streamFactory;
     }
 
-    #[NoDiscard]
-    #[Override]
+    #[NoDiscard()]
+    #[Override()]
     public function createResponse(int $code = 200, string $reasonPhrase = ''): ResponseInterface
     {
         return new HttpResponse($this->streamFactory->createStream(), new HttpHeaders([]), '', $code, $reasonPhrase);

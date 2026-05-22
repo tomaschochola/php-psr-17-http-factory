@@ -30,8 +30,8 @@ use function is_resource;
  */
 readonly class StreamFactory implements StreamFactoryInterface
 {
-    #[NoDiscard]
-    #[Override]
+    #[NoDiscard()]
+    #[Override()]
     public function createStream(string $content = ''): StreamInterface
     {
         $stream = $this->createStreamFromFile('php://temp/maxmemory:2097152', 'w+');
@@ -43,8 +43,8 @@ readonly class StreamFactory implements StreamFactoryInterface
         return $stream;
     }
 
-    #[NoDiscard]
-    #[Override]
+    #[NoDiscard()]
+    #[Override()]
     public function createStreamFromFile(string $filename, string $mode = 'r'): StreamInterface
     {
         $handle = fopen($filename, $mode);
@@ -56,8 +56,8 @@ readonly class StreamFactory implements StreamFactoryInterface
         return $this->createStreamFromResource($handle);
     }
 
-    #[NoDiscard]
-    #[Override]
+    #[NoDiscard()]
+    #[Override()]
     public function createStreamFromResource(mixed $resource): StreamInterface
     {
         return new HttpStream($resource);

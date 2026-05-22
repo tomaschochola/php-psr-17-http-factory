@@ -31,9 +31,9 @@ use function is_string;
  */
 readonly class ServerRequestFactory implements ServerRequestFactoryInterface
 {
-    private readonly StreamFactoryInterface $streamFactory;
+    private StreamFactoryInterface $streamFactory;
 
-    private readonly UriFactoryInterface $uriFactory;
+    private UriFactoryInterface $uriFactory;
 
     public function __construct(StreamFactoryInterface $streamFactory, UriFactoryInterface $uriFactory)
     {
@@ -44,8 +44,8 @@ readonly class ServerRequestFactory implements ServerRequestFactoryInterface
     /**
      * @param array<mixed, mixed> $serverParams
      */
-    #[NoDiscard]
-    #[Override]
+    #[NoDiscard()]
+    #[Override()]
     public function createServerRequest(string $method, mixed $uri, array $serverParams = []): ServerRequestInterface
     {
         return new HttpServerRequest($this->streamFactory->createStream(), new HttpHeaders([]), '', $method, is_string($uri) ? $this->uriFactory->createUri($uri) : $uri, '', $serverParams, [], [], [], null, []);

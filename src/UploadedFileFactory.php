@@ -29,9 +29,9 @@ use const UPLOAD_ERR_OK;
  */
 readonly class UploadedFileFactory implements UploadedFileFactoryInterface
 {
-    #[NoDiscard]
-    #[Override]
-    public function createUploadedFile(StreamInterface $stream, int|null $size = null, int $error = UPLOAD_ERR_OK, string|null $clientFilename = null, string|null $clientMediaType = null): UploadedFileInterface
+    #[NoDiscard()]
+    #[Override()]
+    public function createUploadedFile(StreamInterface $stream, int | null $size = null, int $error = UPLOAD_ERR_OK, string | null $clientFilename = null, string | null $clientMediaType = null): UploadedFileInterface
     {
         return new HttpUploadedFile($stream, $size, $error, $clientFilename, $clientMediaType);
     }

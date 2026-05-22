@@ -30,9 +30,9 @@ use TomasChochola\Psr\Http\Message\HttpRequest;
  */
 readonly class RequestFactory implements RequestFactoryInterface
 {
-    private readonly StreamFactoryInterface $streamFactory;
+    private StreamFactoryInterface $streamFactory;
 
-    private readonly UriFactoryInterface $uriFactory;
+    private UriFactoryInterface $uriFactory;
 
     public function __construct(StreamFactoryInterface $streamFactory, UriFactoryInterface $uriFactory)
     {
@@ -40,8 +40,8 @@ readonly class RequestFactory implements RequestFactoryInterface
         $this->uriFactory = $uriFactory;
     }
 
-    #[NoDiscard]
-    #[Override]
+    #[NoDiscard()]
+    #[Override()]
     public function createRequest(string $method, mixed $uri): RequestInterface
     {
         return new HttpRequest($this->streamFactory->createStream(), new HttpHeaders([]), '', $method, $uri instanceof UriInterface ? $uri : $this->uriFactory->createUri($uri), '');

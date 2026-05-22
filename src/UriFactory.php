@@ -28,8 +28,8 @@ use Uri\WhatWg\Url;
  */
 readonly class UriFactory implements UriFactoryInterface
 {
-    #[NoDiscard]
-    #[Override]
+    #[NoDiscard()]
+    #[Override()]
     public function createUri(string $uri = ''): UriInterface
     {
         $parsed = Uri::parse($uri);

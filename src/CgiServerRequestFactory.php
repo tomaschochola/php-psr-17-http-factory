@@ -33,14 +33,14 @@ use const INPUT_SERVER;
  */
 readonly class CgiServerRequestFactory
 {
-    private readonly ServerRequestFactoryInterface $factory;
+    private ServerRequestFactoryInterface $factory;
 
     public function __construct(ServerRequestFactoryInterface $factory)
     {
         $this->factory = $factory;
     }
 
-    #[NoDiscard]
+    #[NoDiscard()]
     public function create(): ServerRequestInterface
     {
         $server = filter_input_array(INPUT_SERVER);
