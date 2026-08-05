@@ -4,29 +4,39 @@
       "email": "tomaschochola@tomaschochola.cz",
       "homepage": "https://github.com/tomaschochola",
       "name": "Tomáš Chochola",
-      "role": "Author"
+      "role": "Enterprise Architect"
     }
   ],
   "autoload": {
     "psr-4": {
-      "TomasChochola\\Psr\\Http\\Factory\\": "./src"
+      "TomasChochola\\Psr\\Http\\Factory\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Tests\\": "./tests"
+      "Tests\\": "tests/"
     }
   },
   "config": {
     "allow-plugins": false,
-    "audit": {
-      "abandoned": "fail"
-    },
     "platform-check": true,
-    "process-timeout": 0,
+    "policy": {
+      "abandoned": {
+        "audit": "fail",
+        "block": true
+      },
+      "advisories": {
+        "audit": "fail",
+        "block": true
+      },
+      "malware": {
+        "audit": "fail",
+        "block": true
+      }
+    },
     "sort-packages": true
   },
-  "description": "tomaschochola/php-psr-17-http-factory",
+  "description": "PSR-17 HTTP factories including CGI server request creation.",
   "funding": [
     {
       "type": "github",
@@ -36,30 +46,32 @@
   "homepage": "https://github.com/tomaschochola/php-psr-17-http-factory",
   "keywords": [
     "tomaschochola",
-    "TomasChochola",
-    "Tomas Chochola",
-    "Tomáš Chochola",
-    "php-psr-17-http-factory"
+    "http",
+    "http-factory",
+    "psr-17",
+    "server-request"
   ],
   "license": "CC-BY-ND-4.0",
-  "minimum-stability": "dev",
   "name": "tomaschochola/php-psr-17-http-factory",
   "prefer-stable": true,
+  "provide": {
+    "psr/http-factory-implementation": "1.0"
+  },
   "repositories": [
     {
       "no-api": true,
-      "type": "git",
-      "url": "https://github.com/tomaschochola/tooling-phpstan.git"
+      "type": "vcs",
+      "url": "https://github.com/tomaschochola/php-psr-7-http-message.git"
     },
     {
       "no-api": true,
-      "type": "git",
+      "type": "vcs",
       "url": "https://github.com/tomaschochola/tooling-php-cs-fixer.git"
     },
     {
       "no-api": true,
-      "type": "git",
-      "url": "https://github.com/tomaschochola/php-psr-7-http-message.git"
+      "type": "vcs",
+      "url": "https://github.com/tomaschochola/tooling-phpstan.git"
     }
   ],
   "require": {
@@ -79,7 +91,6 @@
     "tomaschochola/tooling-phpstan": "^1.0@dev"
   },
   "support": {
-    "docs": "https://github.com/tomaschochola/php-psr-17-http-factory",
     "email": "tomaschochola@tomaschochola.cz",
     "issues": "https://github.com/tomaschochola/php-psr-17-http-factory/issues",
     "source": "https://github.com/tomaschochola/php-psr-17-http-factory.git"

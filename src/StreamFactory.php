@@ -24,6 +24,7 @@ use UnexpectedValueException;
 
 use function fopen;
 use function is_resource;
+use function mb_strlen;
 
 /**
  * @no-named-arguments
@@ -36,8 +37,8 @@ readonly class StreamFactory implements StreamFactoryInterface
     {
         $stream = $this->createStreamFromFile('php://temp/maxmemory:2097152', 'w+');
 
-        if ($content !== '') {
-            $stream->write($content);
+        if ($content !== '' && $stream->write($content) !== mb_strlen($content, '8bit')) {
+            throw new UnexpectedValueException('Unable to write the complete stream content');
         }
 
         return $stream;

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4660a7070c49d35b0a53e04062d7bf6f",
+    "content-hash": "cb0391d24291c3e08db6312794732d05",
     "packages": [
         {
             "name": "psr/http-factory",
@@ -6808,7 +6808,7 @@
         }
     ],
     "aliases": [],
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "stability-flags": {
         "roave/security-advisories": 20,
         "tomaschochola/php-psr-7-http-message": 20,
