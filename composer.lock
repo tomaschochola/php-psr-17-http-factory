@@ -120,12 +120,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/tomaschochola/php-psr-7-http-message.git",
-                "reference": "eacb2c0c741e8af9f0da5a0a9a1cc8f181a78ca3"
+                "reference": "b8615ae5c562028bde7cb99ad2583a69337a847f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tomaschochola/php-psr-7-http-message/zipball/eacb2c0c741e8af9f0da5a0a9a1cc8f181a78ca3",
-                "reference": "eacb2c0c741e8af9f0da5a0a9a1cc8f181a78ca3",
+                "url": "https://api.github.com/repos/tomaschochola/php-psr-7-http-message/zipball/b8615ae5c562028bde7cb99ad2583a69337a847f",
+                "reference": "b8615ae5c562028bde7cb99ad2583a69337a847f",
                 "shasum": ""
             },
             "require": {
@@ -143,8 +143,8 @@
                 "ext-zip": "*",
                 "phpunit/phpunit": "^13.0",
                 "roave/security-advisories": "dev-latest",
-                "tomaschochola/tooling-php-cs-fixer": "^1.0@dev",
-                "tomaschochola/tooling-phpstan": "^1.0@dev"
+                "tomaschochola/tooling-php-cs-fixer": "^2.0@dev",
+                "tomaschochola/tooling-phpstan": "^2.0@dev"
             },
             "type": "library",
             "autoload": {
@@ -165,12 +165,15 @@
                     "email": "tomaschochola@tomaschochola.cz",
                     "homepage": "https://github.com/tomaschochola",
                     "name": "Tomáš Chochola",
-                    "role": "Enterprise Architect"
+                    "role": "Author"
                 }
             ],
             "description": "PSR-7 HTTP message, request, response, stream, URI, and upload implementations.",
             "homepage": "https://github.com/tomaschochola/php-psr-7-http-message",
             "keywords": [
+                "Tomas Chochola",
+                "TomasChochola",
+                "Tomáš Chochola",
                 "http",
                 "http-message",
                 "psr-7",
@@ -187,7 +190,7 @@
                     "url": "https://github.com/sponsors/tomaschochola"
                 }
             ],
-            "time": "2026-08-05T10:28:46+00:00"
+            "time": "2026-08-05T21:42:11+00:00"
         }
     ],
     "packages-dev": [
@@ -6640,12 +6643,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/tomaschochola/tooling-php-cs-fixer.git",
-                "reference": "9fef366b49cef71e399279a79f4c4059b4398186"
+                "reference": "b533e98ffcf3784b2d48700270a105fcd072f3ef"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tomaschochola/tooling-php-cs-fixer/zipball/9fef366b49cef71e399279a79f4c4059b4398186",
-                "reference": "9fef366b49cef71e399279a79f4c4059b4398186",
+                "url": "https://api.github.com/repos/tomaschochola/tooling-php-cs-fixer/zipball/b533e98ffcf3784b2d48700270a105fcd072f3ef",
+                "reference": "b533e98ffcf3784b2d48700270a105fcd072f3ef",
                 "shasum": ""
             },
             "require": {
@@ -6659,7 +6662,7 @@
                 "ext-zip": "*",
                 "phpunit/phpunit": "^13.0",
                 "roave/security-advisories": "dev-latest",
-                "tomaschochola/tooling-phpstan": "^1.0@dev"
+                "tomaschochola/tooling-phpstan": "^2.0@dev"
             },
             "type": "library",
             "autoload": {
@@ -6680,12 +6683,15 @@
                     "email": "tomaschochola@tomaschochola.cz",
                     "homepage": "https://github.com/tomaschochola",
                     "name": "Tomáš Chochola",
-                    "role": "Enterprise Architect"
+                    "role": "Author"
                 }
             ],
             "description": "Shared PHP CS Fixer configuration and custom coding-standard fixers for PHP 8.5.",
             "homepage": "https://github.com/tomaschochola/tooling-php-cs-fixer",
             "keywords": [
+                "Tomas Chochola",
+                "TomasChochola",
+                "Tomáš Chochola",
                 "code-style",
                 "coding-standard",
                 "php-cs-fixer",
@@ -6703,7 +6709,7 @@
                     "url": "https://github.com/sponsors/tomaschochola"
                 }
             ],
-            "time": "2026-08-05T10:28:47+00:00"
+            "time": "2026-08-05T21:42:12+00:00"
         },
         {
             "name": "tomaschochola/tooling-phpstan",
@@ -6711,12 +6717,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/tomaschochola/tooling-phpstan.git",
-                "reference": "5b874cfaae6db68c2f89a5c1f804f9ab0499dbf6"
+                "reference": "2d994046aeda75cc1c0b5d7c0fd01d565c0be1c5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tomaschochola/tooling-phpstan/zipball/5b874cfaae6db68c2f89a5c1f804f9ab0499dbf6",
-                "reference": "5b874cfaae6db68c2f89a5c1f804f9ab0499dbf6",
+                "url": "https://api.github.com/repos/tomaschochola/tooling-phpstan/zipball/2d994046aeda75cc1c0b5d7c0fd01d565c0be1c5",
+                "reference": "2d994046aeda75cc1c0b5d7c0fd01d565c0be1c5",
                 "shasum": ""
             },
             "require": {
@@ -6749,12 +6755,15 @@
                     "email": "tomaschochola@tomaschochola.cz",
                     "homepage": "https://github.com/tomaschochola",
                     "name": "Tomáš Chochola",
-                    "role": "Enterprise Architect"
+                    "role": "Author"
                 }
             ],
             "description": "Shared strict PHPStan 2 configuration for PHP 8.5 libraries and applications.",
             "homepage": "https://github.com/tomaschochola/tooling-phpstan",
             "keywords": [
+                "Tomas Chochola",
+                "TomasChochola",
+                "Tomáš Chochola",
                 "phpstan",
                 "static-analysis",
                 "tomaschochola",
@@ -6771,7 +6780,7 @@
                     "url": "https://github.com/sponsors/tomaschochola"
                 }
             ],
-            "time": "2026-08-05T10:28:47+00:00"
+            "time": "2026-08-05T21:42:12+00:00"
         }
     ],
     "aliases": [],
