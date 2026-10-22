@@ -49,10 +49,7 @@
         "TomasChochola",
         "Tomas Chochola",
         "Tomáš Chochola",
-        "http",
-        "http-factory",
-        "psr-17",
-        "server-request"
+        "php-psr-17-http-factory"
     ],
     "license": "CC-BY-ND-4.0",
     "name": "tomaschochola/php-psr-17-http-factory",
