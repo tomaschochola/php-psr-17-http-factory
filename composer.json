@@ -76,7 +76,7 @@
     ],
     "require": {
         "php": "^8.5.0",
-        "psr/http-factory": "^1.1",
+        "psr/http-factory": "^1.1.0",
         "psr/http-message": "^2.0",
         "tomaschochola/php-psr-7-http-message": "dev-main"
     },
@@ -85,7 +85,7 @@
         "ext-pcntl": "*",
         "ext-xdebug": "*",
         "ext-zip": "*",
-        "phpunit/phpunit": "^13.0",
+        "phpunit/phpunit": "^13.4.5",
         "roave/security-advisories": "dev-latest",
         "tomaschochola/tooling-php-cs-fixer": "dev-main",
         "tomaschochola/tooling-phpstan": "dev-main"
